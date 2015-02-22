@@ -4,21 +4,21 @@
 </div>
 @endforeach
 
-{{ Form::open(array('url' => '/messages/create', 'method' => 'post', 'role' => 'form')) }}
+{!! Form::open(array('url' => '/messages/create', 'method' => 'post', 'role' => 'form')) !!}
 
     <div class="form-group">
-        {{ Form::label('to', 'To') }}
-        {{ Form::hidden('to', Input::old('to'), array('style' => 'width:100%', 'id' => 'to')) }}
+        {!! Form::label('to', 'To') !!}
+        {!! Form::hidden('to', Input::old('to'), array('style' => 'width:100%', 'id' => 'to')) !!}
     </div>
 
     <div class="form-group">
-        {{ Form::label('message', 'Message') }}
-        {{ Form::textarea('message', Input::old('message'), array('class' => 'form-control')) }}
+        {!! Form::label('message', 'Message') !!}
+        {!! Form::textarea('message', Input::old('message'), array('class' => 'form-control')) !!}
     </div>
 
-    {{ Form::button('Send', array('class' => 'btn btn-default btn-primary', 'type' => 'submit')) }}
+    {!! Form::button('Send', array('class' => 'btn btn-default btn-primary', 'type' => 'submit')) !!}
 
-{{ Form::close() }}
+{!! Form::close() !!}
 
 <script type="text/javascript">
 (function($, window, document) {

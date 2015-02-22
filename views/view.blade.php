@@ -16,7 +16,7 @@
 @foreach($messages as $message)
 <div class="row post">
     <div class="col-md-1">
-        {{ Gravatar::image($message->getAuthor()->getEmail(), '', array('width' => 50, 'height' => 50)) }}
+        <img src="{{ gravatar($message->getAuthor()->getEmail(), 50) }}">
     </div>
     <div class="col-md-11">
         <div class="row post-content-container">

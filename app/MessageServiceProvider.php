@@ -5,8 +5,8 @@ namespace Fourum\Message;
 use App;
 use Carbon\Carbon;
 use Event;
-use Fourum\Menu\Item;
-use Fourum\Menu\Menu;
+use Fourum\Menu\Item\LinkItem;
+use Fourum\Menu\SimpleMenu;
 use Fourum\Message\Model\Message;
 use Fourum\Message\Notification\MessageNotification;
 use Fourum\Notification\NotifierInterface;
@@ -31,6 +31,8 @@ class MessageServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__.'/../views', 'message');
+
         $this->registerEvents();
         $this->registerRoutes();
         $this->registerNotifications();
@@ -85,20 +87,20 @@ class MessageServiceProvider extends ServiceProvider
             }
 
             $menu->addItem(
-                new Item("messages{$countText}", '/messages')
+                new LinkItem("messages{$countText}", '/messages')
             );
         });
     }
 
     protected function registerRoutes()
     {
-        Route::get('/messages', 'MessageController@index');
-        Route::get('/messages/create', 'MessageController@getCreate');
-        Route::post('/messages/create', 'MessageController@postCreate');
+        Route::get('/messages', 'Fourum\Message\Http\Controllers\MessageController@index');
+        Route::get('/messages/create', 'Fourum\Message\Http\Controllers\MessageController@getCreate');
+        Route::post('/messages/create', 'Fourum\Message\Http\Controllers\MessageController@postCreate');
         Route::get('/messages/view/{username}', array(
             'as' => 'message.view',
-            'uses' => 'MessageController@view'
+            'uses' => 'Fourum\Message\Http\Controllers\MessageController@view'
         ));
-        Route::get('/messages/user-search', 'MessageController@userSearch');
+        Route::get('/messages/user-search', 'Fourum\Message\Http\Controllers\MessageController@userSearch');
     }
 }
