@@ -1,0 +1,17 @@
+{
+    "name": "fourum/message",
+    "description": "Messaging for Fourum",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Will Pillar",
+            "email": "me@willpillar.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Fourum\\Message\\": "app/"
+        }
+    },
+    "require": {}
+}
