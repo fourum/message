@@ -70,7 +70,7 @@ class MessageController extends FrontController
         $to = $request->get('to');
         $message = $request->get('message');
 
-        $user = $this->users->getByUsername(trim($to));
+        $user = $this->users->get($to);
 
         $message = Message::create(array(
             'from_user_id' => $this->getUser()->getId(),
