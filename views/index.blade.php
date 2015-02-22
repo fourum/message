@@ -7,7 +7,7 @@
 
         <div class="btn-group btn-group-sm buffer-sm">
             @foreach($menu->getItems() as $item)
-            <a href="{{ url($item->getTarget()) }}" class="btn btn-default">{{ ucwords($item->getName()) }}</a>
+                <a href="{{ url($item->getTarget()) }}" class="btn btn-default">{{ ucwords($item->getName()) }}</a>
             @endforeach
         </div>
     </div>
@@ -17,9 +17,11 @@
     <div class="col-md-12">
         <table class="table table-borderless buffer">
             <tbody>
-                @foreach($senders as $user)
+            @foreach($senders as $user)
                 <tr>
-                    <td style="width:50px;">{{ $user->getAvatar(50, 50) }}</td>
+                    <td style="width:50px;">
+                        <img src="{{ gravatar($user->getEmail(), 50) }}">
+                    </td>
                     <td>
                         <h4>
                             <a href="{{ url('/messages/view/' . $user->getUsername()) }}">
@@ -28,7 +30,7 @@
                         </h4>
                     </td>
                 </tr>
-                @endforeach
+            @endforeach
             </tbody>
         </table>
     </div>
