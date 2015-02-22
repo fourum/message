@@ -76,7 +76,7 @@ class MessageServiceProvider extends ServiceProvider
 
     protected function registerEvents()
     {
-        Event::listen('header.menu.loggedin.created', function(Menu $menu, $user) {
+        Event::listen('header.menu.loggedin.created', function(SimpleMenu $menu, $user) {
             $count = count(Message::where('user_id', $user->getId())->where('read', 0)->get()->all());
             $countText = '';
 
