@@ -9,7 +9,7 @@ use Fourum\Notification\NotifiableInterface;
 
 class MessageNotification implements NotificationInterface
 {
-    const TYPE_MESSAGE = 'message';
+    const TYPE = 'message';
 
     protected $notifier;
     protected $notifiable;
@@ -46,7 +46,7 @@ class MessageNotification implements NotificationInterface
 
     public function getType()
     {
-        return self::TYPE_MESSAGE;
+        return self::TYPE;
     }
 
     public function isRead()
