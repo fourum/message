@@ -3,12 +3,9 @@
 namespace Fourum\Message;
 
 use App;
-use Carbon\Carbon;
 use Event;
 use Fourum\Menu\Item\LinkItem;
 use Fourum\Message\Model\Message;
-use Fourum\Notification\NotifierInterface;
-use Fourum\Notification\NotifiableInterface;
 use Fourum\Support\ServiceProvider;
 use Route;
 
