@@ -19,6 +19,6 @@
         }
     },
     "require": {
-        "fourum/support": "dev-master"
+        "fourum/support": "dev-master@dev"
     }
 }
