@@ -20,6 +20,5 @@
     },
     "require": {
         "fourum/support": "dev-master"
-    },
-    "minimum-stability": "dev"
+    }
 }
