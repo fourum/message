@@ -7,6 +7,7 @@ use Event;
 use Fourum\Menu\Item\LinkItem;
 use Fourum\Message\Model\Message;
 use Fourum\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 use Route;
 
 class MessageServiceProvider extends ServiceProvider
@@ -27,6 +28,20 @@ class MessageServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__.'/../views', 'message');
+
+        if (! Schema::hasTable('messages')) {
+            Schema::create('messages', function ($table) {
+                $table->engine = "InnoDb";
+
+                $table->increments('id')->unsigned();
+                $table->integer('from_user_id')->unsigned()->index();
+                $table->integer('user_id')->unsigned()->index();
+                $table->text('content');
+                $table->tinyInteger('read');
+                $table->timestamps();
+                $table->softDeletes();
+            });
+        }
 
         $this->registerEvents();
         $this->registerRoutes();
