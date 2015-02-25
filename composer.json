@@ -19,6 +19,7 @@
         }
     },
     "require": {
-        "fourum/support": "dev-master@dev"
-    }
+        "fourum/support": "dev-master"
+    },
+    "minimum-stability": "dev"
 }
