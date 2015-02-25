@@ -6,12 +6,10 @@ use App;
 use Carbon\Carbon;
 use Event;
 use Fourum\Menu\Item\LinkItem;
-use Fourum\Menu\SimpleMenu;
 use Fourum\Message\Model\Message;
-use Fourum\Message\Notification\MessageNotification;
 use Fourum\Notification\NotifierInterface;
 use Fourum\Notification\NotifiableInterface;
-use Illuminate\Support\ServiceProvider;
+use Fourum\Support\ServiceProvider;
 use Route;
 
 class MessageServiceProvider extends ServiceProvider
@@ -36,6 +34,7 @@ class MessageServiceProvider extends ServiceProvider
         $this->registerEvents();
         $this->registerRoutes();
         $this->registerNotifications();
+        $this->registerRepository();
     }
 
     /**
@@ -57,28 +56,19 @@ class MessageServiceProvider extends ServiceProvider
         return [];
     }
 
+    protected function registerRepository()
+    {
+        $this->setupRepository('message', 'message_id', 'Fourum\Message\Model\Message');
+    }
+
     protected function registerNotifications()
     {
-        $factory = App::make('Fourum\Notification\NotificationFactory');
-        $repoFactory = App::make('Fourum\Repository\RepositoryFactory');
-        $repoRegistry = App::make('Fourum\Repository\RepositoryRegistry');
-
-        $factory->addType(MessageNotification::TYPE_MESSAGE, function (
-            NotifierInterface $notifier,
-            NotifiableInterface $notifiable,
-            $read,
-            Carbon $timestamp
-        ){
-            return new MessageNotification($notifier, $notifiable, $read, $timestamp);
-        });
-
-        $repoFactory->addForeignKey('message_id', 'Fourum\Message\Model\Message');
-        $repoRegistry->add('message', 'Fourum\Message\Model\Message');
+        $this->setupNotifications('Fourum\Message\Notification\MessageNotification');
     }
 
     protected function registerEvents()
     {
-        Event::listen('header.menu.loggedin.created', function(SimpleMenu $menu, $user) {
+        Event::listen('header.menu.loggedin.created', function($menu, $user) {
             $count = count(Message::where('user_id', $user->getId())->where('read', 0)->get()->all());
             $countText = '';
 

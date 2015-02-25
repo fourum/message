@@ -9,7 +9,7 @@ use Fourum\Notification\NotifiableInterface;
 
 class MessageNotification implements NotificationInterface
 {
-    const TYPE_MESSAGE = 2;
+    const TYPE_MESSAGE = 'message';
 
     protected $notifier;
     protected $notifiable;

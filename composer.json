@@ -8,10 +8,17 @@
             "email": "me@willpillar.com"
         }
     ],
+
+    "repositories": [
+        { "type": "git", "url": "git@github.com:fourum/support.git" }
+    ],
+
     "autoload": {
         "psr-4": {
             "Fourum\\Message\\": "app/"
         }
     },
-    "require": {}
+    "require": {
+        "fourum/support": "dev-master"
+    }
 }
