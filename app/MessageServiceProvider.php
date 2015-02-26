@@ -27,6 +27,10 @@ class MessageServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (! $this->checkPackageEnabled()) {
+            return;
+        }
+
         $this->loadViewsFrom(__DIR__.'/../views', 'message');
 
         if (! Schema::hasTable('messages')) {
@@ -104,5 +108,20 @@ class MessageServiceProvider extends ServiceProvider
             'uses' => 'Fourum\Message\Http\Controllers\MessageController@view'
         ));
         Route::get('/messages/user-search', 'Fourum\Message\Http\Controllers\MessageController@userSearch');
+    }
+
+    public function getPackageName()
+    {
+        return 'Fourum - Messaging';
+    }
+
+    public function isPackage()
+    {
+        return true;
+    }
+
+    public function getPackageDescription()
+    {
+        return 'Provides messaging functionality.';
     }
 }
